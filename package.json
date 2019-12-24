@@ -2,11 +2,11 @@
   "name": "Nikola",
   "version": "0.3.5",
   "description": "Open source and unoffocial cross-platform desktop app to control tesla vehicles",
-  "author": "Geraldo Ramos <email@geraldoramos.com> (https://geraldoramos.com)",
-  "homepage": "https://github.com/geraldoramos/nikola",
+  "author": "Geraldo Ramos <email@lunars.com> (https://lunars.com)",
+  "homepage": "https://github.com/lunars/nikola",
   "repository": {
     "type": "git",
-    "url": "https://github.com/geraldoramos/nikola.git"
+    "url": "https://github.com/lunars/nikola.git"
   },
   "build": {
     "generateUpdatesFilesForAllChannels": true,
@@ -16,11 +16,11 @@
     "publish": [
       {
         "provider": "github",
-        "owner": "geraldoramos",
+        "owner": "lunars",
         "repo": "nikola"
       }
     ],
-    "appId": "com.github.geraldoramos.nikola",
+    "appId": "com.github.lunars.nikola",
     "mac": {
       "category": "public.app-category.utilities",
       "icon": "icons/icon.icns",
