@@ -8,9 +8,7 @@
 
 > Currently available for MacOS, Windows and Linux.
 
-Download [last release](https://github.com/geraldoramos/nikola/releases/latest)
-
-*PS: Tesla Auth token is stored locally upon login and is not sent anywhere besides Tesla servers. To remove the token from your computer, just logout.*
+Download [last release](https://github.com/Lunars/nikola/releases/latest)
 
 ## Features
 
@@ -23,35 +21,31 @@ Download [last release](https://github.com/geraldoramos/nikola/releases/latest)
 * Auto-update (of the app, not the car)
 * Custom images for all Tesla models
 * Dynamic icon for battery level
-* Tesla AuthKey stored locally 
+* Tesla AuthKey stored locally
 
 
 ## Contributing
 
-1. Check work backlog [here](https://github.com/geraldoramos/nikola/projects)
-2. [Fork](https://help.github.com/articles/fork-a-repo/) this repository to your own GitHub account and then [clone](https://help.github.com/articles/cloning-a-repository/) it to your local device
-3. Install the dependencies: `yarn`
-4. Acquire a key from [google maps javascript api](https://developers.google.com/maps/documentation/javascript/get-api-key)
-4. Build the code, start the app, and watch for changes: `GOOGLE_MAPS=YOURKEY yarn run dev`
+Check work backlog [here](https://github.com/geraldoramos/nikola/projects)
 
-To make sure that your code works in the finished app, you can generate the binary using:
+You can generate the binary in the `packed` folder using:
 
+```bash
+# Dev
+TESLAJS_SERVER=http://localhost:7654/ VIN=123 TESLAJS_LOG=2 GOOGLE_MAPS=123 yarn dev
+
+# Build for prod
+TESLAJS_SERVER=http://localhost:7654/ VIN=123 GOOGLE_MAPS=123 yarn build
 ```
-$ yarn run build
+
+To get port 7654 exposed from your car, you can use a port forward:
+
+```bash
+# Get nonStandardPort from your lunars/config.sh file
+# 7654 is the car API
+ssh -o StrictHostKeyChecking=no -L 7654:localhost:7654 root@yourserver.com -p $nonStandardPort ssh -L 7654:localhost:7654 root@localhost -p $nonStandardPort
 ```
-
-Make sure to include your google maps key in the `../components/Maps.js` file before building and remember to not commit it. I will do a way to use it as `ENV` but it doesn't work for the build, just for dev environment for now.
-
-After that, you'll see the binaries in the `packed` folder.
 
 ## Todo
 
 Check [Projects](https://github.com/geraldoramos/nikola/projects) for details.
-
-
-## License
-MIT License
-
-## DISCLAIMER
-This software is provided "as is", without warranty of any kind, express or implied, including but not limited to the warranties of merchantability, fitness for a particular purpose, title and non-infringement. Use at Your Own Risk. The distributed software tracks anonimized data for statistics purposes (Google Analytics). If you prefer a version without this, feel free to download the code and build your own.
-
