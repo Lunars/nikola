@@ -124,12 +124,14 @@ function createWindow() {
     mainWindow.show()
     // start login and init sequence
     const startLogin = async (authToken, loginEmailPw) => {
+
       try {
         if (!authToken) {
-          authToken = await tesla.login(loginEmailPw)
+          authToken = process.env.VIN;
           store.set('authToken', authToken)
         }
         mainWindow.webContents.send('login', true)
+
         await getTeslaData()
         startPoller()
       } catch (error) {
@@ -159,7 +161,7 @@ function createWindow() {
           }
 
           store.set('vehicleId', vehicle.vehicleID)
-          if (vehicle.state !== 'online') {
+          if (vehicle.state.toLowerCase() !== 'online') {
             mainWindow.webContents.send('tesla-data', {
               ...vehicle
             })

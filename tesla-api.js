@@ -4,13 +4,7 @@ const log = require('electron-log');
 module.exports = {
     login: ({ username, password}) => {
         return new Promise((resolve, reject) => {
-            tjs.login(username, password, function (err, result) {                
-                if (err) {
-                    reject(err)
-                    return
-                }
-                resolve(result.authToken)
-            })
+            resolve(process.env.VIN)
         })
     },
     vehicle: (authToken) => {
@@ -19,7 +13,7 @@ module.exports = {
             authToken: authToken
         };
         log.info('Hitting Tesla API on ' + new Date())
-        tjs.vehicle(options, function (err, vehicle) {
+        tjs.vehicles(options, function (err, vehicle) {
             if (err) {
                 log.error(err)
                 reject(err)
@@ -27,9 +21,9 @@ module.exports = {
             }
             resolve({
                 authToken: authToken,
-                vehicleID: vehicle.id_s,
+                vehicleID: process.env.VIN,
                 model: tjs.getModel(vehicle),
-                state: vehicle.state
+                state: "ONLINE"
             })
         });
     })},
