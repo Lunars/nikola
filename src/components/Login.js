@@ -5,9 +5,13 @@ import logo from '../assets/img/logo.svg'
 class Login extends React.Component {
   constructor(props) {
     super(props)
-    this.state = { username: '', password: '', error: null, loading: false }
+    this.state = { username: '1@1', password: '1', error: null, loading: false }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+  }
+
+  componentDidMount() {
+    this.handleSubmit();
   }
 
   handleChange(event) {
@@ -19,7 +23,6 @@ class Login extends React.Component {
   }
 
   handleSubmit(event) {
-    event.preventDefault()
     ipcRenderer.send('login-attempt', {
       username: this.state.username,
       password: this.state.password
@@ -51,48 +54,19 @@ class Login extends React.Component {
         <div className="logo-center">
           <img src={logo} width="200px" />
         </div>
-        <form onSubmit={this.handleSubmit}>
-          <div className="form-group">
-            <div className="login-error">
-              {this.state.error ? 'Login Failed' : null}
-            </div>
-            <label>Email address</label>
-            <input
-              required
-              type="email"
-              name="username"
-              value={this.state.email}
-              onChange={this.handleChange}
-              className="form-control"
-              placeholder="Enter email"
-            />
-          </div>
-          <div className="form-group">
-            <label>Password</label>
-            <input
-              required
-              type="password"
-              name="password"
-              value={this.state.password}
-              onChange={this.handleChange}
-              className="form-control"
-              placeholder="Enter Password"
-            />
-          </div>
-          <div className="col-md-12 text-center ">
-            <p className="disclaimer text-center">
-              Auth token is stored locally and is not sent anywhere besides
-              Tesla servers. To remove the token from this computer, just
-              logout.
-            </p>
-            <button
-              type="submit"
-              className=" btn btn-block mybtn btn-primary tx-tfm"
-            >
-              Login
-            </button>
-          </div>
-        </form>
+        <div className="col-md-12 text-center ">
+          <p className="disclaimer text-center">
+            Auth token is stored locally and is not sent anywhere besides
+            Tesla servers. To remove the token from this computer, just
+            logout.
+          </p>
+          <button
+            type="submit"
+            className=" btn btn-block mybtn btn-primary tx-tfm"
+          >
+            Login
+          </button>
+        </div>
       </div>
     )
   }
